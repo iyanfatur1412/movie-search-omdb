@@ -2,38 +2,65 @@ const mainContent = document.querySelector(".content");
 const search = document.querySelector(".search input");
 const btnSearch = document.querySelector(".search button");
 
-// function searchMovie(url, success, error) {
-//     let xhr = new XMLHttpRequest();
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState == 4) {
-//             if (xhr.status == 200) {
-//                 success(JSON.parse(xhr.response));
-//             } else {
-//                 error(xhr.responseText);
-//             }
-//         }
-//     }
-//     xhr.open("get", url);
-//     xhr.send();
-// }
+let searchURL = "http://www.omdbapi.com/?apikey=78716308&s=";
+let detailURL = "http://www.omdbapi.com/?apikey=78716308&i=";
 
-let searchURL = "https://www.omdbapi.com/?apikey=8716308&s=";
-let detailURL = "https://www.omdbapi.com/?apikey=78716308&i=";
+defaultView();
 
-btnSearch.addEventListener("click", function() {
-    // searchMovie(searchURL+search.value, tampilkanData, error => console.log(error));
-    fetch(searchURL+search.value)
-    .then(data => data.json())
-    .then(data => console.log(data.Search))
-    .catch(err => console.log(err))
+
+async function defaultView() {
+    const defaultData = await getData(searchURL, search.value);
+    tampilkanData(defaultData);
+}
+
+btnSearch.addEventListener("click", async function () {
+    const data = await getData(searchURL, search.value);
+    tampilkanData(data);
 })
-search.addEventListener("keyup", function(e) {
+search.addEventListener("keyup", async function (e) {
     e.preventDefault();
-    if(e.key == "Enter") {
-        searchMovie(searchURL+search.value, tampilkanData, error => console.log(error));
+    const data = await getData(searchURL, search.value);
+    if (e.key == "Enter") {
+        tampilkanData(data);
     }
 })
 
+// Live Searching
+// search.addEventListener("input", function(e) {
+//     const query = e.target.value.trim();
+
+//     if(query === "") {
+//         mainContent.innerHTML = "";
+//     }
+
+//     const debugCount = setTimeout(async () => {
+//         try {
+//             const data = await getData(searchURL, query)
+//             tampilkanData(data);
+//         } catch {
+//             mainContent.innerHTML = "<h3>Terjadi Kesalahan</h3>"
+//         }
+//     }, 500)
+// })
+
+
+mainContent.addEventListener("click", async function (e) {
+    e.preventDefault();
+    if (e.target.classList.contains("card")) {
+        const id = e.target.dataset.id;
+        const data = await getData(detailURL, id);
+        detail(data);
+    }
+})
+
+function getData(api, value) {
+    const data = fetch(api + value)
+        .then(data => data.json())
+        .then(data => data)
+        .catch(err => err)
+
+    return data;
+}
 
 
 // Function Tampilkan Data
@@ -42,25 +69,19 @@ function tampilkanData(data) {
     // console.log(data.Search);
     data.Search.forEach(el => card += elTampilData(el));
     mainContent.innerHTML = card;
-    detail();
 }
 
 
 
 // Function ketika card diklik tampil Detail Data (modal pop up)
-function detail() {
+function detail(data) {
     const modalBox = document.querySelector(".contain-modal");
     const btnCard = Array.from(document.querySelectorAll(".card"));
-    btnCard.map(btn => btn.addEventListener("click", function() {
-        searchMovie(detailURL+this.dataset.id, data => { 
-            modalBox.innerHTML = elTampilBox(data)
-            const close = document.querySelector(".close");
-            close.addEventListener("click", function() {
-                modalBox.innerHTML = "";
-            })
-        },
-        error => console.log(error));
-    }));
+    modalBox.innerHTML = elTampilBox(data)
+    const close = document.querySelector(".close");
+    close.addEventListener("click", function () {
+        modalBox.innerHTML = "";
+    })
 }
 
 
@@ -74,7 +95,7 @@ function elTampilData(data) {
             <figure class="card" data-id=${data.imdbID}>
                 <img src="${data.Poster}" alt="movie">
                 <div class="info">
-                    <h3 class="title">${data.Title}</h3>
+                    <h3 class="title">${titleSub(data.Title)}</h3>
                     <p class="year">${data.Year}</p>
                     <p class="genre">Action, Adventure</p>
                     <h4 class="score">8.6</h4>
@@ -105,4 +126,9 @@ function elTampilBox(data) {
                 </div>
             </div>
     `
+}
+
+
+function titleSub(title) {
+    return title.length > 20 ? title.substring(0,20)+"...." : title;
 }

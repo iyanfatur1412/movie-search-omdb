@@ -6,14 +6,16 @@
 }
 
 .container {
-    background-color: #000;
+    min-height: 100vh;
     padding: 0 0 30px 0;
+    background-color: #1b1b1b;
 }
 
 /* Navbar */
 .navbar {
     width: 100%;
     padding: 20px;
+    background-color: #000;
 }
 
 .navbar .brand {
@@ -41,6 +43,9 @@
     background-color: #fff;
     appearance: none;
     outline: none;
+    @media screen and (max-width: 540px) {
+        width: 70%;    
+    }
 }
 
 .search button {
@@ -61,8 +66,12 @@
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
     gap: 20px;
+
+    @media screen and (max-width: 540px) {
+        width: 100%;
+        justify-content: center;    
+    }
 }
 
 
@@ -77,6 +86,10 @@
     border: 2px solid #4b4b4b;
     position: relative;
     cursor: pointer;
+    @media screen and (max-width: 540px) {
+        width: 150px;
+        height: 200px;    
+    }
 }
 
 .card::after {
@@ -107,6 +120,9 @@
 
 .card .info h3 {
     font-size: 1.6rem;
+    @media screen and (max-width: 540px) {
+        font-size: 1.2rem;    
+    }
 }
 
 .card .info p {
@@ -151,11 +167,24 @@
     border: 6px solid rgb(255, 145, 0);
     display: flex;
     color: #fff;
+    @media screen and (max-width: 540px) {
+        width: 80%;
+        flex-direction: column;
+        overflow: scroll;
+        scroll-behavior: smooth;
+        scrollbar-width: 3px;
+        border-width: 3px;
+    }
 }
 
 .modal-body .img {
     width: 100%;
     margin-right: 20px;
+    @media screen and (max-width: 540px) {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 15px;    
+    }
 }
 
 .modal-body .img img {
@@ -182,6 +211,10 @@
     cursor: pointer;
     border-radius: 50%;
     font-weight: bold;
+    @media screen and (max-width: 540px) {
+        top: 10px;
+        right: 10px;   
+    }
 }
 
 @keyframes fadeIn {
