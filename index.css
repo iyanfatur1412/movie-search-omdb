@@ -1,0 +1,197 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container {
+    background-color: #000;
+    padding: 0 0 30px 0;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    padding: 20px;
+}
+
+.navbar .brand {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-left: 80px;
+}
+
+.navbar .brand span {
+    color: rgb(255, 145, 0);
+    font-size: 1.6rem;
+}
+
+.search {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.search input {
+    display: inline-block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+    appearance: none;
+    outline: none;
+}
+
+.search button {
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: rgb(255, 145, 0);
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+/* Content */
+
+.content {
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    gap: 20px;
+}
+
+
+/* Card */
+
+.card {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #fff;
+    border: 2px solid #4b4b4b;
+    position: relative;
+    cursor: pointer;
+}
+
+.card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.1), #000);
+    z-index: 2;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .info {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    padding: 10px;
+    z-index: 10;
+}
+
+.card .info h3 {
+    font-size: 1.6rem;
+}
+
+.card .info p {
+    font-size: .9rem;
+    margin: 3px;
+}
+
+.card .info .score {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: gold;
+}
+
+
+/* Modal */
+.modal-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 999;
+    opacity: 0;
+    animation: fadeIn .9s forwards;
+    }
+
+.modal-body {
+    position: relative;
+    margin: auto;
+    top: 10%;
+    width: 60%;
+    max-height: 80%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #000;
+    border: 6px solid rgb(255, 145, 0);
+    display: flex;
+    color: #fff;
+}
+
+.modal-body .img {
+    width: 100%;
+    margin-right: 20px;
+}
+
+.modal-body .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-body .text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.modal-body .text p {
+    padding: 5px;
+}
+
+.modal-body .close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    padding: 10px 15px;
+    background-color: rgb(255, 145, 0);
+    cursor: pointer;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0%;
+    }
+}
