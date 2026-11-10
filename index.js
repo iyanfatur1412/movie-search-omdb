@@ -17,8 +17,9 @@ const btnSearch = document.querySelector(".search button");
 //     xhr.send();
 // }
 
-let searchURL = "https://www.omdbapi.com/?apikey=8716308&s=";
-let detailURL = "https://www.omdbapi.com/?apikey=78716308&i=";
+const proxyUrl = 'https://corsproxy.io/?';
+let searchURL = proxyUrl + encodeURIComponent("https://www.omdbapi.com/?apikey=8716308&s=");
+let detailURL = proxyUrl + encodeURIComponent("https://www.omdbapi.com/?apikey=78716308&i=");
 
 btnSearch.addEventListener("click", function() {
     // searchMovie(searchURL+search.value, tampilkanData, error => console.log(error));
