@@ -2,8 +2,8 @@ const mainContent = document.querySelector(".content");
 const search = document.querySelector(".search input");
 const btnSearch = document.querySelector(".search button");
 
-let searchURL = "http://www.omdbapi.com/?apikey=78716308&s=";
-let detailURL = "http://www.omdbapi.com/?apikey=78716308&i=";
+let searchURL = "https://www.omdbapi.com/?apikey=78716308&s=";
+let detailURL = "https://www.omdbapi.com/?apikey=78716308&i=";
 
 defaultView();
 
